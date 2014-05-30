@@ -46,8 +46,9 @@ def ansi(str):
 def goto(x, y):
     ansi(str(y)+";"+str(x)+"H")
 
-def color(n):
-    ansi(str(n)+"m")
+def color(*args):
+    for n in args:
+        ansi(str(n)+"m")
 
 def clear():
     goto(1, 1)
@@ -55,3 +56,8 @@ def clear():
 
 def reset():
     ansi("0m")
+
+def wrapper(f):
+    try: f()
+    except: traceback.print_exc()
+    reset()
